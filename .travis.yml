@@ -1,23 +1,23 @@
+
 language: python 
 python: 
 - "3.6"
-addons:
-- postgresql: "10.6"
---   dist: trusty
-global:
-  - PGPORT=5432
+services:
+- postgresql
 env: 
 - DJANGO=2.0 DB=postgres
+global:
+  - PGPORT=5432
 before_install: 
 - cd decide
 install: 
-- pip3 install -r ../requirements.txt
-services:
-  - postgresql
-before_script:
- - cp local_settings.travis.py local_settings.py
- - psql -c "create user decide with password 'decide'" 
- - psql -c "create database decide owner decide"
- - python3 manage.py migrate
+- pip install -r ../requirements.txt
+before_script: 
+- cp local_settings.travis.py local_settings.py
+- psql -c "create user decide with password 'decide'"
+- psql -c "create database decide owner decide"
+- python manage.py migrate
 script: 
-- python3 manage.py test
+- python manage.py test
+addons:
+  postgresql: "9.6"
