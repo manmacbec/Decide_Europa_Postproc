@@ -68,7 +68,7 @@ MODULES = [
     'voting',
 ]
 
-BASEURL = 'http://localhost:8000'
+BASEURL = 'https://decide-europa-postproc-forked.herokuapp.com/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -144,7 +144,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+APIS = {}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -153,6 +153,8 @@ STATIC_URL = '/static/'
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
 
+import django_heroku
+django_heroku.settings(locals())
 try:
     from local_settings import *
 except ImportError:
