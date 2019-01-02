@@ -76,7 +76,7 @@ MODULES = [
 if(imported):
     BASEURL = 'https://decide-europa-postproc.herokuapp.com/'
 else:
-    BASEURL = 'http://localhost:8080'
+    BASEURL = 'http://localhost:8000'
 APIS = {}
 
 MIDDLEWARE = [
