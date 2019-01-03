@@ -41,30 +41,11 @@ class PostProcView(APIView):
         #Se ordenan las opciones por el número de escaños
         options.sort(key=lambda x: -x['seats'])
         return Response(options)
-        
-    def equalityVoting(options, seats, method):
-        groups = {}
-        divOptions = {}
-        res = {}
-        
-        #Obtener grupos
-        for opt in options:
-            groups.append()
 
-        #Inicializar listas de opciones
-        for group in groups:
-            divOptions[group] = []      
-
-        #Categorizar opciones por grupo
-        for opt in options:
-            divOptions[opt.get("group", "no_group")].append(opt)
-
-        return Response(res)
 
     def post(self, request):
         """
          * type: IDENTITY | EQUALITY | WEIGHT
-         * groups: true
          * options: [
             {
              option: str,
