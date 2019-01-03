@@ -5,16 +5,11 @@ from rest_framework.response import Response
 class PostProcView(APIView):
 
     def identity(self, options):
-        out = []
-
         for opt in options:
-            out.append({
-                **opt,
-                'postproc': opt['votes'],
-            });
+            opt['postproc'] = opt['votes']
 
-        out.sort(key=lambda x: -x['postproc'])
-        return Response(out)
+        options.sort(key=lambda x: -x['postproc'])
+        return Response(options)
 
     def dhondt(self, options, seats):
         #Se añade un campo de escaños (seats) a cada una de las opciones
@@ -31,9 +26,45 @@ class PostProcView(APIView):
         options.sort(key=lambda x: -x['seats'])
         return Response(options)
 
+
+    def sainteLague(self, options, seats):
+        #Se añade un campo de escaños (seats) a cada una de las opciones
+        for opt in options:
+            opt['seats'] = 0
+
+        #Para cada uno de los escaños se calcula a que opción le correspondería el escaño 
+        #teniendo en cuenta los ya asignados
+        for i in range(seats):
+            max(options, 
+                key = lambda x : x['votes'] / (2 * x['seats'] + 1.0))['seats'] += 1
+
+        #Se ordenan las opciones por el número de escaños
+        options.sort(key=lambda x: -x['seats'])
+        return Response(options)
+        
+    def equalityVoting(options, seats, method):
+        groups = {}
+        divOptions = {}
+        res = {}
+        
+        #Obtener grupos
+        for opt in options:
+            groups.append()
+
+        #Inicializar listas de opciones
+        for group in groups:
+            divOptions[group] = []      
+
+        #Categorizar opciones por grupo
+        for opt in options:
+            divOptions[opt.get("group", "no_group")].append(opt)
+
+        return Response(res)
+
     def post(self, request):
         """
          * type: IDENTITY | EQUALITY | WEIGHT
+         * groups: true
          * options: [
             {
              option: str,
@@ -52,6 +83,10 @@ class PostProcView(APIView):
 
         elif t == 'DHONDT':
             seats = int(float(request.data.get('seats', '8')))
-            return self.dhondt(opts,seats)            
+            return self.dhondt(opts,seats)
+
+        elif t == 'SAINTELAGUE':
+            seats = int(float(request.data.get('seats', '8')))
+            return self.sainteLague(opts, seats)            
 
         return Response({})
