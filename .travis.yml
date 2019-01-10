@@ -33,7 +33,7 @@ deploy:
     file: $RELEASE_NAME.zip
     skip_cleanup: true
     on:
-        repo: manmacbec/Decide-Europa-Postproc 
+        repo: Decide-Europa-Postproc 
         tags: true
         all_branches: true
 addons:
