@@ -19,7 +19,6 @@ before_script:
 - python manage.py migrate
 script: 
 - python manage.py test
-after deploy:
 - >-
     curl -s -X POST -H \"Content-Type: application/json2" 
     -H "Accept: application/json" 
