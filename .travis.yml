@@ -29,7 +29,7 @@ before_deploy:
 - zip -r $RELEASE_NAME.zip $RELEASE_NAME
 deploy:
     provider: releases
-    api_key: "GITHUB OAUTH TOKEN"
+    api_key: 1a2de7ae8338f17e2e5512f60903ff7c628b48a1
     file: $RELEASE_NAME.zip
     skip_cleanup: true
     on:
