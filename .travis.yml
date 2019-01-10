@@ -16,7 +16,5 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
-script: 
-- python manage.py test postproc
 addons:
   postgresql: "9.6"
