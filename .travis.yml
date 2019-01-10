@@ -21,21 +21,5 @@ before_script:
 - psql -c "create database decide owner decide"
 script:
 - python manage.py test postproc
-before_deploy:
-- rm -rf $RELEASE_NAME || exit 0
-- mkdir $RELEASE_NAME
-- cp LICENSE $RELEASE_NAME/
-- cp -a ./static $RELEASE_NAME/
-- cp -f build/*css $RELEASE_NAME/static/css/
-- tar -czf $RELEASE_NAME-$TRAVIS_TAG.tar.gz $RELEASE_NAME
-- zip -r $RELEASE_NAME-$TRAVIS_TAG.zip $RELEASE_NAME
-deploy:
-  provider: releases
-  api_key: 
-    secure: [redacted]
-  file: foobar.zip
-  skip_cleanup: true
-  on:
-    repo: manmacbec/Decide-Europa-Postproc
 addons:
   postgresql: "9.6"
