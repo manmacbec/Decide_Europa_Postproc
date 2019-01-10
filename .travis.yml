@@ -27,7 +27,7 @@ before_deploy:
 - cd foobar
 deploy:
     provider: releases
-    api_key: 1a2de7ae8338f17e2e5512f60903ff7c628b48a1
+    api_key: 9b07536b11c01652c9c837b12016e86beeb71b93
     file: foobar.zip
     skip_cleanup: true
     on:
