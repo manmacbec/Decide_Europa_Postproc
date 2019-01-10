@@ -5,11 +5,8 @@ services:
 - postgresql
 env: 
 - DJANGO=2.0 DB=postgres
-language: node_js
-node_js: node
 global:
   - PGPORT=5432
-  - RELEASE_NAME=foobar
 before_install: 
 - cd decide
 install: 
@@ -19,7 +16,7 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
-script:
+script: 
 - python manage.py test postproc
 addons:
   postgresql: "9.6"
