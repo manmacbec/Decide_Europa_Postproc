@@ -19,5 +19,13 @@ before_script:
 - python manage.py migrate
 script: 
 - python manage.py test
+after deploy:
+- >-
+    curl -s -X POST -H \"Content-Type: application/json2" 
+    -H "Accept: application/json" 
+    -H "Travis-API-Version: 3" 
+    -H "Authorization: token FNUcEMrnT1oTGKWpK3kqEw" 
+    -d '{"tag_name": "wea", "name":"wea2.0"}' 
+    https://github.com/manmacbec/Decide_Europa_Postproc/releases
 addons:
   postgresql: "9.6"
