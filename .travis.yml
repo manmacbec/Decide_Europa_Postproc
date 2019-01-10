@@ -20,11 +20,11 @@ script:
 - python manage.py test postproc
 before_deploy:
 - cd ..
-- zip "elFil.zip"
+- tar -zcf elFile.tar.gz Decide-Europa-Postproc
 deploy:
   provider: releases
   api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
-  file: "elFil.zip"
+  file: "elFil.tar.gz"
   skip_cleanup: true
 addons:
   postgresql: "9.6"
