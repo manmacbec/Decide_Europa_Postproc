@@ -22,9 +22,6 @@ script:
 before_deploy:
 - rm -rf foobar || exit 0
 - mkdir foobar
-- cp LICENSE foobar/
-- cp -a ./static foobar/
-- cp -f build/*css foobar/static/css/
 - tar -czf foobar.tar.gz foobar
 - zip -r foobar.zip foobar
 - cd foobar
