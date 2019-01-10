@@ -33,6 +33,6 @@ deploy:
     file: $RELEASE_NAME.zip
     skip_cleanup: true
     on:
-        repo: "https://github.com/manmacbec/Decide_Europa_Postproc"
+        all_branches: true
 addons:
   postgresql: "9.6"
