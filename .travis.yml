@@ -5,6 +5,8 @@ services:
 - postgresql
 env: 
 - DJANGO=2.0 DB=postgres
+language: node_js
+node_js: node
 global:
   - PGPORT=5432
   - RELEASE_NAME=foobar
@@ -12,8 +14,6 @@ before_install:
 - cd decide
 install: 
 - pip install -r ../requirements.txt
-language: node_js
-node_js: node
 before_script: 
 - cp local_settings.travis.py local_settings.py
 - psql -c "create user decide with password 'decide'"
