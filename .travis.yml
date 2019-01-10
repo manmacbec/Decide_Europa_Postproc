@@ -7,7 +7,7 @@ env:
 - DJANGO=2.0 DB=postgres
 global:
   - PGPORT=5432
-  - RELEASE_NAME=foobar
+  - RELEASE_NAME=foobargi
 before_install: 
 - cd decide
 install: 
@@ -33,6 +33,8 @@ deploy:
     file: $RELEASE_NAME.zip
     skip_cleanup: true
     on:
-        repo: manmacbec/Decide-Europa-Postproc
+        repo: manmacbec/Decide-Europa-Postproc 
+        tags: true
+        all_branches: true
 addons:
   postgresql: "9.6"
