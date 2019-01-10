@@ -7,6 +7,7 @@ env:
 - DJANGO=2.0 DB=postgres
 global:
   - PGPORT=5432
+  - RELEASE_NAME=foobar
 before_install: 
 - cd decide
 install: 
@@ -16,5 +17,22 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
+script:
+- python manage.py test postproc
+before_deploy:
+- rm -rf $RELEASE_NAME || exit 0
+- mkdir $RELEASE_NAME
+- cp LICENSE $RELEASE_NAME/
+- cp -a ./static $RELEASE_NAME/
+- cp -f build/*css $RELEASE_NAME/static/css/
+- tar -czf $RELEASE_NAME.tar.gz $RELEASE_NAME
+- zip -r $RELEASE_NAME.zip $RELEASE_NAME
+deploy:
+    provider: releases
+    api_key: "GITHUB OAUTH TOKEN"
+    file: $RELEASE_NAME.zip
+    skip_cleanup: true
+    on:
+        repo: manmacbec/Decide-Europa-Postproc
 addons:
   postgresql: "9.6"
