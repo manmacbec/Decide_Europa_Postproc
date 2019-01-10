@@ -16,6 +16,8 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
+before_deploy:
+zip elFile
 deploy:
   provider: releases
   api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
