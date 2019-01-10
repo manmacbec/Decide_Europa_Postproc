@@ -34,7 +34,6 @@ deploy:
     skip_cleanup: true
     on:
         repo: Decide-Europa-Postproc 
-        tags: true
         all_branches: true
 addons:
   postgresql: "9.6"
