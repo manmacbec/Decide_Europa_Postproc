@@ -1,18 +1,18 @@
-language: python 
-python: 
-- "3.6"
+language: python
+python:
+- '3.6'
 services:
 - postgresql
-env: 
+env:
 - DJANGO=2.0 DB=postgres
 global:
-  - PGPORT=5432
-  - RELEASE_NAME=file
-before_install: 
+- PGPORT=5432
+- RELEASE_NAME=file
+before_install:
 - cd decide
-install: 
+install:
 - pip install -r ../requirements.txt
-before_script: 
+before_script:
 - cp local_settings.travis.py local_settings.py
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
@@ -26,12 +26,11 @@ before_deploy:
 - zip -r foobar.zip foobar
 - cd foobar
 deploy:
-    provider: releases
-    api_key: 
-        secure: FNUcEMrnT1oTGKWpK3kqEw
-    file: foobar.zip
-    skip_cleanup: true
-    on:
-        all_branches: true
+  provider: releases
+  api_key:
+    secure: qAPN/KdctKpJr5egaEmLtgx8L8R9dFz8BW0448OcJl8Zmj8Eo4SMK0Pbhi/nW94/QlBojGetKF8OPgx5+tBa3nQ3R3PIBXlexZfB629Fn/55/QVml6h4ZbyePHSxlbUhgAvu6Oc4yOyZQIXc9MP1DXKbA6mL5+YZKZa2sb30kLCZi1/9+loKeJ4JITC+WUrpC29MxJqI14fC3RrxtSuCwSeCpXBuTdKMh9c8mFx4RLPU2/U2cGqZf0MxJbXL7Ub4ZlVZ94IDJ0r0wX4OV4rvBQrw71F7etzKhyAS1RGNb3is2nSnl6qXg1TC7b5J5CVmyA5I1MbJVjJGyEqXN04BqgyFlo9GxQS+79NIyxOIP7pBf5TzOPn9U07ivyyQyIfK3z3uoMwv1JcFtqfwwI6PuBuDZ+Dr6Hrervt+RpJV3QKFRIm/+JX5pkc2AFoTAPz5aCKNHsuc5g0dbLytVB4n4EfUB/VB3Qc7HeX/xpomWyLXvHrFTgmdP1VKF/Q6mwRdy0HiQASYKBL8PMvgGQ5Om67VO3pC2aA5D+H1VhJYWcNYVoOhe3reqTgbwu8LXYOw4xApd4NsX5CFDEYXMQIuh29wnCQ8K1tyj2/sHnNlgHRhsuhceP8KpH73S6s+hqwNNh2RRJN9h68rIwTVRGEASLi+MteaNIZUUGzVF5ade+E=
+  file: foobar.zip
+  on:
+    repo: manmacbec/Decide_Europa_Postproc
 addons:
-  postgresql: "9.6"
+  postgresql: '9.6'
