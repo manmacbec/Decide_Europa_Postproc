@@ -4,6 +4,8 @@ python:
 services:
 - postgresql
 env: 
+  global:
+    - RELEASE_NAME=foobar
 - DJANGO=2.0 DB=postgres
 global:
   - PGPORT=5432
@@ -11,6 +13,8 @@ before_install:
 - cd decide
 install: 
 - pip install -r ../requirements.txt
+language: node_js
+node_js: node
 before_script: 
 - cp local_settings.travis.py local_settings.py
 - psql -c "create user decide with password 'decide'"
@@ -19,12 +23,20 @@ before_script:
 script:
 - python manage.py test postproc
 before_deploy:
-- cd ..
-- tar -zcf elFile.tar.gz Decide-Europa-Postproc
+- rm -rf $RELEASE_NAME || exit 0
+- mkdir $RELEASE_NAME
+- cp LICENSE $RELEASE_NAME/
+- cp -a ./static $RELEASE_NAME/
+- cp -f build/*css $RELEASE_NAME/static/css/
+- tar -czf $RELEASE_NAME-$TRAVIS_TAG.tar.gz $RELEASE_NAME
+- zip -r $RELEASE_NAME-$TRAVIS_TAG.zip $RELEASE_NAME
 deploy:
   provider: releases
-  api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
-  file: "elFil.tar.gz"
+  api_key: 
+    secure: [redacted]
+  file: foobar.zip
   skip_cleanup: true
+  on:
+    repo: manmacbec/Decide-Europa-Postproc
 addons:
   postgresql: "9.6"
