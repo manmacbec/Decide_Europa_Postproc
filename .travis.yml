@@ -26,6 +26,7 @@ before_deploy:
 - tar -czf foobar.tar.gz foobar
 - zip -r foobar.zip foobar
 - value=`date "+%H:%M:%S   %d/%m/%y"`
+- git tag $value
 
 deploy:
   provider: releases
