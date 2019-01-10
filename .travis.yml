@@ -19,11 +19,11 @@ before_script:
 script:
 - python manage.py test postproc
 before_deploy:
-- zip elFile
+- zip elFil
 deploy:
   provider: releases
   api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
-  file: "elFile"
+  file: "elFil"
   skip_cleanup: true
   on:
     tags: true
