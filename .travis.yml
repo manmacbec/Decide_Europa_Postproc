@@ -18,10 +18,8 @@ before_script:
 - psql -c "create database decide owner decide"
 script:
 - python manage.py test postproc
-before_deploy:
-- cd ..
-- zip -zcf elFil.zip
 deploy:
+- zip elZip
   provider: releases
   api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
   file: "elFil.zip"
