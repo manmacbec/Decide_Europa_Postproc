@@ -11,6 +11,13 @@ before_install:
 - cd decide
 install: 
 - pip install -r ../requirements.txt
+before_script: 
+- cp local_settings.travis.py local_settings.py
+- psql -c "create user decide with password 'decide'"
+- psql -c "ALTER USER decide WITH SUPERUSER;"
+- psql -c "create database decide owner decide"
+script:
+- python manage.py test postproc
 before_deploy:
 - zip elFile
 deploy:
