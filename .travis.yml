@@ -4,11 +4,10 @@ python:
 services:
 - postgresql
 env: 
-  global:
-    - RELEASE_NAME=foobar
 - DJANGO=2.0 DB=postgres
 global:
   - PGPORT=5432
+  - RELEASE_NAME=foobar
 before_install: 
 - cd decide
 install: 
