@@ -16,13 +16,12 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
-script: 
-- >-
-    curl -s -X POST -H "Content-Type: application/json2" 
-    -H "Accept: application/json" 
-    -H "Travis-API-Version: 3" 
-    -H "Authorization: token FNUcEMrnT1oTGKWpK3kqEw" 
-    -d '{"tag_name": "wea", "name":"wea2.0"}' 
-    https://github.com/manmacbec/Decide_Europa_Postproc/releases
+deploy:
+  provider: releases
+  api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
+  file: "elFile"
+  skip_cleanup: true
+  on:
+    tags: true
 addons:
   postgresql: "9.6"
