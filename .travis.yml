@@ -25,7 +25,5 @@ deploy:
   api_key: "6e6bdfb037e82a0231e42d330fb7c850e5a44b03"
   file: "elFil"
   skip_cleanup: true
-  on:
-    tags: true
 addons:
   postgresql: "9.6"
