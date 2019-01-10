@@ -24,7 +24,10 @@ before_deploy:
 - mkdir foobar
 - tar -czf foobar.tar.gz foobar
 - zip -r foobar.zip foobar
+- value=`cat version.txt`
+- echo "$value"
 - cd foobar
+
 deploy:
   provider: releases
   api_key:
