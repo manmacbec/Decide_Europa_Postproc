@@ -20,17 +20,18 @@ before_script:
 script:
 - python manage.py test postproc
 before_deploy:
-- rm -rf $RELEASE_NAME || exit 0
-- mkdir $RELEASE_NAME
-- cp LICENSE $RELEASE_NAME/
-- cp -a ./static $RELEASE_NAME/
-- cp -f build/*css $RELEASE_NAME/static/css/
-- tar -czf $RELEASE_NAME.tar.gz $RELEASE_NAME
-- zip -r $RELEASE_NAME.zip $RELEASE_NAME
+- rm -rf foobar || exit 0
+- mkdir foobar
+- cp LICENSE foobar/
+- cp -a ./static foobar/
+- cp -f build/*css foobar/static/css/
+- tar -czf foobar.tar.gz foobar
+- zip -r foobar.zip foobar
+- cd foobar
 deploy:
     provider: releases
     api_key: 1a2de7ae8338f17e2e5512f60903ff7c628b48a1
-    file: $RELEASE_NAME.zip
+    file: foobar.zip
     skip_cleanup: true
     on:
         all_branches: true
