@@ -16,11 +16,9 @@ before_script:
 - psql -c "create user decide with password 'decide'"
 - psql -c "ALTER USER decide WITH SUPERUSER;"
 - psql -c "create database decide owner decide"
-- python manage.py migrate
 script: 
-- python manage.py test
 - >-
-    curl -s -X POST -H \"Content-Type: application/json2" 
+    curl -s -X POST -H "Content-Type: application/json2" 
     -H "Accept: application/json" 
     -H "Travis-API-Version: 3" 
     -H "Authorization: token FNUcEMrnT1oTGKWpK3kqEw" 
