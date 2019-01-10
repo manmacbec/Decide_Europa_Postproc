@@ -28,6 +28,7 @@ before_deploy:
 - value=`cat version.txt`
 - echo "$value"
 - cd foobar
+- git tag $value
 
 deploy:
   provider: releases
