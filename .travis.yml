@@ -25,7 +25,8 @@ before_deploy:
 - mkdir foobar
 - tar -czf foobar.tar.gz foobar
 - zip -r foobar.zip foobar
-- value=`date "+%H.%M.%S.%d.%m.%y"`
+- value=`date "+%y.%m.%d.%H.%M.%S"`
+- value = "v." + value
 - git tag $value
 
 deploy:
